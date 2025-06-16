@@ -43,7 +43,7 @@ function buscarItemPorNombre(nombreBuscado, lista) {
 }
 function solicitarPedido() {
     console.log("Iniciando Pedido de Restaurante");
-    const nombreCliente = prompt("Bienvenido al restaurante. Por favor, ingrese su nombre:").toUpperCase();
+    const nombreCliente = prompt("Bienvenido al restaurante. Por favor, ingrese su nombre:");
     if (nombreCliente === null || nombreCliente.trim() === "") {
         alert("Pedido cancelado. Necesitamos su nombre para continuar.");
         console.log("Pedido cancelado por el cliente (nombre no ingresado).");
