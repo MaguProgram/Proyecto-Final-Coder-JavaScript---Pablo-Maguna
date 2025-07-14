@@ -1,0 +1,45 @@
+body {
+    background-color: rgba(112, 161, 120, 0.685);
+}
+
+.lead {
+    font-size: 30px;
+    color: #333;
+}
+
+#verPedidoBtn {
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 30px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#mensajeErrorCarrito {
+    font-size: 25px;
+    text-align: center;
+    padding-top: 40px;
+    font-weight: 600;
+}
+
+#resumenPedidoContainer {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+}
+
+#platosContainer,
+#bebidasContainer,
+#postresContainer {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+}
