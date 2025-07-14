@@ -13,7 +13,7 @@ class MenuItem {
                 ${this.nombre} <span class="badge bg-primary rounded-pill">$${this.precio}</span>
             </button>`;
     }
-}
+};
 
 // Arrays de datos originales, que ahora convertiremos en instancias de MenuItem.
 const platosPrincipalesData = [
@@ -84,7 +84,7 @@ let pedidoActual = {
 //  Guarda el pedido actual del cliente en localStorage.
 function guardarPedidoEnStorage() {
     localStorage.setItem('pedidoActual', JSON.stringify(pedidoActual));
-}
+};
 
 // Carga el pedido y el nombre del cliente desde localStorage al inicio.
 function cargarEstadoDesdeStorage() {
@@ -104,15 +104,14 @@ function cargarEstadoDesdeStorage() {
     }
     renderizarMenu(); // Siempre renderizar el menú al cargar, por si se queda en esa sección
     renderizarPedidoActual(); // Renderizar el pedido si había algo guardado
-}
+};
 
 // Guarda el nombre del cliente en localStorage.
 function guardarNombreEnStorage(nombre) {
     localStorage.setItem('nombreCliente', nombre);
-}
+};
 
 // Oculta todas las secciones principales y luego muestra la sección especificada.
-
 function mostrarSeccion(sectionElement) {
     // Ocultar todas las secciones primero
     nombreClienteSection.style.display = 'none';
@@ -121,7 +120,7 @@ function mostrarSeccion(sectionElement) {
     confirmacionFinalSection.style.display = 'none';
     // Mostrar la sección deseada
     sectionElement.style.display = 'block';
-}
+};
 
 // Muestra el saludo al cliente y el input de su nombre.
 function mostrarSaludo() {
@@ -131,12 +130,9 @@ function mostrarSaludo() {
         saludoCliente.textContent = '';
         inputNombreCliente.value = '';
     }
-}
-
+};
 
 // Renderiza los ítems del menú en sus respectivos contenedores (platos, bebidas, postres).
-// Utiliza el método toHtml() de la clase MenuItem para generar el HTML.
-
 function renderizarMenu() {
     // Limpiamos los contenedores antes de renderizar
     platosContainer.innerHTML = '';
@@ -159,7 +155,7 @@ function renderizarMenu() {
     document.querySelectorAll('.seleccionar-item-btn').forEach(button => {
         button.addEventListener('click', seleccionarItemHandler);
     });
-}
+};
 
 // Renderiza el resumen del pedido actual en la sección del carrito.
 // Actualiza los precios y el costo total.
@@ -198,7 +194,7 @@ function renderizarPedidoActual() {
 
     resumenPedidoContainer.innerHTML = resumenHTML;
     costoTotalDisplay.textContent = costoTotal.toFixed(2);
-}
+};
 
 // Valida el nombre y lo guarda en localStorage.
 function handleGuardarNombre() {
@@ -215,7 +211,7 @@ function handleGuardarNombre() {
         saludoCliente.classList.remove('text-success');
         saludoCliente.classList.add('text-danger');
     }
-}
+};
 
 // Maneja el evento de selección de un ítem del menú.
 function seleccionarItemHandler(event) {
@@ -232,14 +228,14 @@ function seleccionarItemHandler(event) {
         renderizarPedidoActual(); // Actualizamos el resumen del pedido en el DOM.
         // console.warn(`DEBUG: Seleccionado: ${itemSeleccionado.nombre} (${itemSeleccionado.tipo})`);
     }
-}
+};
 
 // Lleva al usuario a la sección del carrito.
 function handleVerPedido() {
     mostrarSeccion(carritoSection);
     renderizarPedidoActual(); // Asegura que el resumen esté actualizado al entrar al carrito
     mensajeErrorCarrito.style.display = 'none'; // Ocultar cualquier mensaje de error previo
-}
+};
 
 // Valida que todos los ítems obligatorios estén seleccionados.
 function handleConfirmarPedido() {
@@ -255,7 +251,7 @@ function handleConfirmarPedido() {
     // Actualiza el nombre final en la sección de confirmación
     nombreClienteFinal.textContent = nombreUsuario;
     mostrarSeccion(confirmacionFinalSection); // Llevar a la sección de confirmación final
-}
+};
 
 // Reinicia el estado del pedido actual y lo limpia de localStorage.
 function handleLimpiarPedido() {
@@ -263,12 +259,12 @@ function handleLimpiarPedido() {
     guardarPedidoEnStorage(); // Guardar el estado vacío en localStorage
     renderizarPedidoActual(); // Actualizar el resumen del pedido en el DOM
     mostrarSeccion(menuSection); // Volver al menú
-}
+};
 
 function handleVolverMenu() {
     mostrarSeccion(menuSection);
     mensajeErrorCarrito.style.display = 'none'; // Ocultar cualquier mensaje de error
-}
+};
 
 // Reinicia completamente la aplicación.
 function handleNuevoPedido() {
@@ -278,7 +274,7 @@ function handleNuevoPedido() {
     mostrarSaludo(); // Vaciar el saludo o mostrar el input para un nuevo nombre
     mostrarSeccion(nombreClienteSection); // Volver al inicio para un nuevo cliente
     renderizarPedidoActual(); // Limpiar el resumen visual del pedido
-}
+};
 
 // Se ejecuta cuando el DOM está completamente cargado, asegurando que todos los elementos existan.
 document.addEventListener('DOMContentLoaded', () => {
