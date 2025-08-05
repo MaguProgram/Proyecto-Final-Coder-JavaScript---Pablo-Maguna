@@ -69,6 +69,10 @@
             "precio": 350
         },
         {
+            "nombre": "Lemon Pie",
+            "precio": 250
+        },
+        {
             "nombre": "Nada",
             "precio": 0
         }
