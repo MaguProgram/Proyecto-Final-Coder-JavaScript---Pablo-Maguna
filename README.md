@@ -1,7 +1,7 @@
 <h1 align="center">Hola! 👋, Mi nombre es Pablo Maguna</h1>
-<h3 align="center">Actualmente me encuentro estudiando el curso de desarrollo web en CoderHouse desde Argentina</h3>
+<h3 align="center">Actualmente me encuentro estudiando el curso de desarrollo web en CoderHouse</h3>
 
-- 🔭 ESte es el proyecto en el cual estoy trabajando [Menu Restaurante](https://maguprogram.github.io/Proyecto-Final-Coder-JavaScript---Pablo-Maguna/) En este estoy desarrollando una app para que el cliente pueda seleccionar el plato, la bebida y el postre disponibles en la carta.
+- 🔭 Este es el proyecto en el cual estoy trabajando [Menu Restaurante](https://maguprogram.github.io/Proyecto-Final-Coder-JavaScript---Pablo-Maguna/) Desarrollé una app para que los clientes puedan armar su propio menu con los platos, las bebidas y los postres disponibles en la carta.
 
 - 📫 Si quieres contactarme puedes envirame un correo a **magunapablo@gmail.com**
 

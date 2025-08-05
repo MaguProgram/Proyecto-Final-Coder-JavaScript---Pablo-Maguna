@@ -15,38 +15,98 @@ class MenuItem {
     }
 };
 
-// Arrays de datos originales, que ahora convertiremos en instancias de MenuItem.
-const platosPrincipalesData = [
-    { nombre: "Pasta", precio: 1500 },
-    { nombre: "Risotto", precio: 1600 },
-    { nombre: "Pollo al verdeo", precio: 1700 },
-    { nombre: "Pizza", precio: 1200 },
-    { nombre: "Hamburguesa", precio: 1800 },
-    { nombre: "Nada", precio: 0 }
-];
-const bebidasData = [
-    { nombre: "Agua", precio: 300 },
-    { nombre: "Gaseosa", precio: 400 },
-    { nombre: "Limonada", precio: 350 },
-    { nombre: "Cerveza", precio: 500 },
-    { nombre: "Vino", precio: 800 },
-    { nombre: "Nada", precio: 0 }
-];
-const postresData = [
-    { nombre: "Helado", precio: 300 },
-    { nombre: "Ensalada de frutas", precio: 200 },
-    { nombre: "Tarta", precio: 400 },
-    { nombre: "Brownie", precio: 350 },
-    { nombre: "Nada", precio: 0 }
-];
+// Variable que contiene el menu completo cuando se carga
+let menuCompleto = [];
 
-// Array combinado de todos los items del menú, con sus tipos y IDs únicos.
-// Usamos flatMap para mapear y aplanar los arrays en uno solo.
-const menuCompleto = [
-    ...platosPrincipalesData.map((item, index) => new MenuItem(index + 1, item.nombre, item.precio, "comida")),
-    ...bebidasData.map((item, index) => new MenuItem(platosPrincipalesData.length + index + 1, item.nombre, item.precio, "bebida")),
-    ...postresData.map((item, index) => new MenuItem(platosPrincipalesData.length + bebidasData.length + index + 1, item.nombre, item.precio, "postre"))
-];
+async function cargarMenu() {
+    try {
+        const response = await fetch('menu.json');
+
+        if (!response.ok) {
+            throw new Error('Error al cargar el menú: ' + response.statusText);
+        }
+        const data = await response.json();
+
+        // Crear instancias de MenuItem y combinar los datos
+        const platosPrincipales = data.platosPrincipalesData.map((item, index) => new MenuItem(index + 1, item.nombre, item.precio, "comida"));
+        const bebidas = data.bebidasData.map((item, index) => new MenuItem(platosPrincipales.length + index + 1, item.nombre, item.precio, "bebida"));
+        const postres = data.postresData.map((item, index) => new MenuItem(platosPrincipales.length + bebidas.length + index + 1, item.nombre, item.precio, "postre"));
+
+        menuCompleto = [...platosPrincipales, ...bebidas, ...postres];
+
+        renderizarMenu();
+
+    } catch (error) {
+        console.error('No se pudo cargar el menú:', error);
+    }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    cargarMenu();
+    cargarEstadoDesdeStorage();
+});
+
+// -------------- LIBRERIAS -------------------------------------
+function sweet() {
+    Swal.fire({
+        title: "Gracias por elegirnos!",
+        text: "El chef esta preparando tu pedido 👨‍🍳",
+        icon: "success",
+        draggable: true
+    });
+};
+
+function sweetError() {
+    Swal.fire({
+        icon: "error",
+        title: "ADVERTENCIA!",
+        text: "Debes seleccionar un plato principal, bebida y postre para confirmar el pedido.",
+    });
+};
+// ----------------- APLICAR TESTIFY-----------------------------
+const contenedoresDeMenu = document.querySelectorAll(".list-group");
+
+// Itera sobre la lista de elementos y agrega el mismo 'event listener' a cada uno
+contenedoresDeMenu.forEach(container => {
+    container.addEventListener("click", () => {
+        Toastify({
+            text: "Agregado correctamente",
+            duration: 2000,
+            newWindow: true,
+            stopOnFocus: true,
+            gravity: "top",
+            position: "right",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                width: "300px",
+                "border-radius": "5px",
+                "margin-top": "10px",
+                "font-size": "20px",
+                "text-align": "center",
+            },
+            onClick: function () { }
+        }).showToast();
+    });
+});
+
+document.getElementById("limpiarPedidoBtn").addEventListener("click", () => {
+    Toastify({
+        text: "Borraste tu pedido",
+        duration: 1500,
+        newWindow: true,
+        gravity: "top",
+        position: "left",
+        stopOnFocus: true,
+        style: {
+            background: "red",
+            width: "300px",
+            "border-radius": "5px",
+            "margin-top": "10px",
+            "font-size": "20px",
+        },
+        onClick: function () { }
+    }).showToast();
+});
+// -------------------------------------------------------
 
 // Obtenemos todas las referencias a los elementos HTML con los que vamos a interactuar.
 const nombreClienteSection = document.getElementById('nombreClienteSection');
@@ -241,12 +301,12 @@ function handleVerPedido() {
 function handleConfirmarPedido() {
     // Validación de un proceso COMPLETO.
     if (!pedidoActual.comida || !pedidoActual.bebida || !pedidoActual.postre) {
-        console.warn("ADVERTENCIA: Debes seleccionar un plato principal, bebida y postre para confirmar el pedido.");
+        sweetError();
         mensajeErrorCarrito.style.display = 'block'; // Mostrar mensaje de error en el DOM
         return;
     }
 
-    mensajeErrorCarrito.style.display = 'none'; // Ocultar mensaje de error si la validación pasa
+    mensajeErrorCarrito.style.display = sweet(); // Ocultar mensaje de error si la validación pasa
 
     // Actualiza el nombre final en la sección de confirmación
     nombreClienteFinal.textContent = nombreUsuario;
@@ -286,10 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
             handleGuardarNombre();
         }
     });
-
-    verPedidoBtn.addEventListener('click', handleVerPedido);
-    confirmarPedidoBtn.addEventListener('click', handleConfirmarPedido);
-    limpiarPedidoBtn.addEventListener('click', handleLimpiarPedido);
-    volverMenuBtn.addEventListener('click', handleVolverMenu);
-    nuevoPedidoBtn.addEventListener('click', handleNuevoPedido);
 });
+
+
+verPedidoBtn.addEventListener('click', handleVerPedido);
+confirmarPedidoBtn.addEventListener('click', handleConfirmarPedido);
+limpiarPedidoBtn.addEventListener('click', handleLimpiarPedido);
+volverMenuBtn.addEventListener('click', handleVolverMenu);
+nuevoPedidoBtn.addEventListener('click', handleNuevoPedido);

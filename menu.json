@@ -1,0 +1,76 @@
+{
+    "platosPrincipalesData": [
+        {
+            "nombre": "Pasta",
+            "precio": 1500
+        },
+        {
+            "nombre": "Risotto",
+            "precio": 1600
+        },
+        {
+            "nombre": "Pollo al verdeo",
+            "precio": 1700
+        },
+        {
+            "nombre": "Pizza",
+            "precio": 1200
+        },
+        {
+            "nombre": "Hamburguesa",
+            "precio": 1800
+        },
+        {
+            "nombre": "Nada",
+            "precio": 0
+        }
+    ],
+    "bebidasData": [
+        {
+            "nombre": "Agua",
+            "precio": 300
+        },
+        {
+            "nombre": "Gaseosa",
+            "precio": 400
+        },
+        {
+            "nombre": "Limonada",
+            "precio": 350
+        },
+        {
+            "nombre": "Cerveza",
+            "precio": 500
+        },
+        {
+            "nombre": "Vino",
+            "precio": 800
+        },
+        {
+            "nombre": "Nada",
+            "precio": 0
+        }
+    ],
+    "postresData": [
+        {
+            "nombre": "Helado",
+            "precio": 300
+        },
+        {
+            "nombre": "Ensalada de frutas",
+            "precio": 200
+        },
+        {
+            "nombre": "Tarta",
+            "precio": 400
+        },
+        {
+            "nombre": "Brownie",
+            "precio": 350
+        },
+        {
+            "nombre": "Nada",
+            "precio": 0
+        }
+    ]
+}
